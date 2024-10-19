@@ -28,22 +28,21 @@ benchmark name                       samples       iterations    estimated
                                      mean          low mean      high mean
                                      std dev       low std dev   high std dev
 -------------------------------------------------------------------------------
-c++ - double                                   100             2      2.011 ms
-                                        9.99661 us    9.98887 us    10.0056 us
-                                        42.7888 ns    36.4479 ns    51.5103 ns
+c++ - double                                   100             2     1.9966 ms
+                                         9.9543 us    9.95097 us    9.95889 us
+                                        19.6994 ns    14.8916 ns    32.4928 ns
 
-c++ - long double                              100             2      2.002 ms
-                                         10.023 us    10.0062 us     10.058 us
-                                        119.067 ns    59.0551 ns    202.835 ns
+c++ - long double                              100             2     1.9982 ms
+                                        10.0478 us     9.9641 us    10.4541 us
+                                        809.913 ns    37.6539 ns    1.92958 us
 
-c++ - cpp_dec_float_50                         100             1    513.649 ms
-                                        5.12636 ms    5.11923 ms    5.13871 ms
-                                        46.7369 us    31.5427 us    75.1531 us
+c++ - cpp_dec_float_50                         100             1    399.947 ms
+                                        3.99811 ms    3.99505 ms     4.0031 ms
+                                        19.6161 us    13.5582 us    29.0831 us
 
-c++ - mpfr_float_50                            100             1    224.598 ms
-                                        2.40176 ms    2.39496 ms    2.41154 ms
-                                        41.3239 us    30.9517 us    53.0149 us
-
+c++ - mpfr_float_50                            100             1    202.279 ms
+                                        2.02991 ms    2.02584 ms    2.03758 ms
+                                        27.5354 us    15.7219 us    41.0004 us
 
 ===============================================================================
 test cases: 1 | 1 passed
