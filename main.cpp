@@ -3,6 +3,9 @@
 #include <catch.hpp>
 #include <boost/multiprecision/cpp_dec_float.hpp>
 #include <boost/multiprecision/mpfr.hpp>
+#ifdef __x86_64__
+#include <boost/multiprecision/float128.hpp>
+#endif
 
 template<class T>
 inline bool precisionIsGoodEnough( T a,
@@ -24,12 +27,16 @@ T computePi()
 	T i = 3;
 	T m = -1;
 
-	while ( not precisionIsGoodEnough(pi_4, previous, 0.0001) )
+	const T kOne = 1;
+	const T kTwo = 2;
+	const T kPrec = 0.0001;
+
+	while ( not precisionIsGoodEnough(pi_4, previous, kPrec) )
 	{
 		previous = pi_4;
-		pi_4 = pi_4 + (m * (1 / i));
+		pi_4 = pi_4 + (m * (kOne / i));
 		m = -m;
-		i += 2;
+		i += kTwo;
 	}
 	return pi_4 * 4;
 }
@@ -42,6 +49,9 @@ TEST_CASE("computePi") {
 	std::cout << "c++ - long double =      " << std::setprecision(50) << computePi<long double>() << std::endl;
 	std::cout << "c++ - cpp_dec_float_50 = " << std::setprecision(50) << computePi<cpp_dec_float_50>() << std::endl;
 	std::cout << "c++ - mpfr_float_50 =    " << std::setprecision(50) << computePi<mpfr_float_50>() << std::endl;
+#ifdef __x86_64__
+	std::cout << "c++ - float128      =    " << std::setprecision(50) << computePi<float128>() << std::endl;
+#endif
 
     BENCHMARK("c++ - double") {
 		return computePi<double>();
@@ -51,8 +61,13 @@ TEST_CASE("computePi") {
 	};
 	 BENCHMARK("c++ - cpp_dec_float_50") {
 	 	return computePi<cpp_dec_float_50>();
-	 };
+	};
 	BENCHMARK("c++ - mpfr_float_50") {
 		return computePi<mpfr_float_50>();
 	};
+#ifdef __x86_64__
+	BENCHMARK("c++ - float128") {
+		return computePi<float128>();
+	};
+#endif
 }
